@@ -8,7 +8,8 @@ import {
   UpdateTaskRequest,
 } from '../models/task.model';
 import { HttpClient } from '@angular/common/http';
-import { Observable, tap } from 'rxjs';
+import { delay, Observable, of, tap } from 'rxjs';
+import { mockTasks } from '../models/mockTask.model';
 
 @Injectable({ providedIn: 'root' })
 export class TaskService {
@@ -21,6 +22,7 @@ export class TaskService {
     pending: 0,
     overdue: 0,
   });
+  private _taskMock = mockTasks;
   private _activeFilter = signal<TaskCategory | null>(null);
   private _isLoading = signal<boolean>(false);
 
@@ -46,6 +48,17 @@ export class TaskService {
 
   loadTasks(): Observable<Task[]> {
     this._isLoading.set(true);
+    if (environment.useMock) {
+      return of(this._taskMock).pipe(
+        delay(600),
+        tap({
+          next: (tasks) => {
+            this._tasks.set(tasks);
+            this._isLoading.set(false);
+          },
+        }),
+      );
+    }
     return this.http.get<Task[]>(this.apiUrl).pipe(
       tap({
         next: (tasks) => {
@@ -58,12 +71,34 @@ export class TaskService {
   }
 
   loadStats(): Observable<TaskStats> {
+    if (environment.useMock) {
+      const tasks = this._taskMock;
+      const todayMid = new Date();
+      todayMid.setHours(0, 0, 0, 0);
+      const stats: TaskStats = {
+        total: tasks.length,
+        done: tasks.filter((t) => t.isDone).length,
+        pending: tasks.filter((t) => !t.isDone).length,
+        overdue: tasks.filter((t) => {
+          if (t.isDone || !t.dueDate) return false;
+          const due = new Date(t.dueDate);
+          due.setHours(0, 0, 0, 0);
+          return due.getTime() < todayMid.getTime();
+        }).length,
+      };
+      return of(stats).pipe(
+        delay(300),
+        tap((s) => this._stats.set(s)),
+      );
+    }
     return this.http
       .get<TaskStats>(`${this.apiUrl}/stats`)
       .pipe(tap((stats) => this._stats.set(stats)));
   }
 
   createTask(data: CreateTaskRequest): Observable<Task> {
+    if (environment.useMock) {
+    }
     return this.http.post<Task>(this.apiUrl, data).pipe(
       tap((newTask) => {
         this._tasks.update((tasks) => [newTask, ...tasks]);

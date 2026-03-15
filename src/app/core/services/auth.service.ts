@@ -28,7 +28,7 @@ export class AuthService {
     this.restoreSession();
   }
 
-    // ── Données mockées ────────────────────────────────────
+  // ── Données mockées ────────────────────────────────────
   private mockResponse: AuthResponse = {
     token: 'mock-jwt-token-familyhub-2026',
     userId: 'mock-user-001',
@@ -37,30 +37,36 @@ export class AuthService {
   };
 
   register(data: RegisterRequest): Observable<AuthResponse> {
-    // Utilise le nom saisi dans le formulaire
-    const response: AuthResponse = {
-      ...this.mockResponse,
-      name:  data.name,
-      email: data.email,
-    };
+    if (environment.useMock) {
+      // Utilise le nom saisi dans le formulaire
+      const response: AuthResponse = {
+        ...this.mockResponse,
+        name: data.name,
+        email: data.email,
+      };
 
-    return of(response).pipe(
-      delay(800),
-      tap(res => this.handleAuthResponse(res))
-    );
-    /* return this.http
+      return of(response).pipe(
+        delay(800),
+        tap((res) => this.handleAuthResponse(res)),
+      );
+    }
+
+    return this.http
       .post<AuthResponse>(`${this.apiUrl}/register`, data)
-      .pipe(tap((response) => this.handleAuthResponse(response))); */
+      .pipe(tap((response) => this.handleAuthResponse(response)));
   }
 
   login(data: LoginRequest): Observable<AuthResponse> {
-    return of<AuthResponse>(this.mockResponse).pipe(
-      delay(800),    // simule un délai réseau de 800ms
-      tap(response => this.handleAuthResponse(response))
-    );
-    /* return this.http
+    if (environment.useMock) {
+      return of<AuthResponse>(this.mockResponse).pipe(
+        delay(800), // simule un délai réseau de 800ms
+        tap((response) => this.handleAuthResponse(response)),
+      );
+    }
+
+    return this.http
       .post<AuthResponse>(`${this.apiUrl}/login`, data)
-      .pipe(tap((response) => this.handleAuthResponse(response))); */
+      .pipe(tap((response) => this.handleAuthResponse(response)));
   }
 
   logout(): void {
