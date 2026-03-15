@@ -1,0 +1,62 @@
+<div class="auth-card">
+
+  <div class="auth-header">
+    <h2>Créer un compte 🏠</h2>
+    <p>Rejoignez votre espace famille</p>
+  </div>
+
+  <form [formGroup]="form" (ngSubmit)="onSubmit()" novalidate>
+
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Prénom</mat-label>
+      <input matInput formControlName="name" placeholder="Tima">
+      <mat-icon matPrefix>person_outline</mat-icon>
+      <mat-error>{{ nameError }}</mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Email</mat-label>
+      <input matInput type="email" formControlName="email"
+             placeholder="tima@example.com">
+      <mat-icon matPrefix>mail_outline</mat-icon>
+      <mat-error>{{ emailError }}</mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Mot de passe</mat-label>
+      <input matInput [type]="showPassword ? 'text' : 'password'"
+             formControlName="password">
+      <mat-icon matPrefix>lock_outline</mat-icon>
+      <button mat-icon-button matSuffix type="button"
+              (click)="showPassword = !showPassword">
+        <mat-icon>{{ showPassword ? 'visibility_off' : 'visibility' }}</mat-icon>
+      </button>
+      <mat-error>{{ passwordError }}</mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Confirmer le mot de passe</mat-label>
+      <input matInput [type]="showPassword ? 'text' : 'password'"
+             formControlName="confirmPassword">
+      <mat-icon matPrefix>lock_outline</mat-icon>
+      <mat-error>{{ confirmError }}</mat-error>
+    </mat-form-field>
+
+    <button mat-raised-button color="primary"
+            type="submit" class="submit-btn"
+            [disabled]="isLoading">
+      @if (isLoading) {
+        <mat-spinner diameter="20" />
+      } @else {
+        Créer mon compte
+      }
+    </button>
+
+  </form>
+
+  <p class="auth-switch">
+    Déjà un compte ?
+    <a routerLink="/auth/login">Se connecter</a>
+  </p>
+
+</div>

@@ -1,0 +1,52 @@
+<aside class="sidebar">
+
+  <!-- Logo -->
+  <div class="logo">
+    <div class="logo-icon">🏠</div>
+    <div class="logo-text">Family<span>Hub</span></div>
+  </div>
+
+  <!-- User card -->
+  <div class="user-card">
+    <div class="user-avatar">{{ userName().charAt(0) }}</div>
+    <div class="user-name">{{ userName() }}</div>
+    <div class="user-date">{{ today }}</div>
+  </div>
+
+  <!-- Navigation -->
+  <nav class="nav">
+    <span class="nav-label">Modules</span>
+
+    @for (item of navItems; track item.label) {
+      @if (item.available) {
+        <!-- Lien cliquable -->
+        <a class="nav-item"
+           [routerLink]="item.route"
+           routerLinkActive="active"
+           [routerLinkActiveOptions]="{ exact: item.route === '/hub' }">
+          <mat-icon class="nav-icon">{{ item.icon }}</mat-icon>
+          <span>{{ item.label }}</span>
+          @if (item.route === '/todo' && pendingCount() > 0) {
+            <span class="nav-badge">{{ pendingCount() }}</span>
+          }
+        </a>
+      } @else {
+        <!-- Item désactivé -->
+        <div class="nav-item disabled">
+          <mat-icon class="nav-icon">{{ item.icon }}</mat-icon>
+          <span>{{ item.label }}</span>
+          <span class="nav-soon">Bientôt</span>
+        </div>
+      }
+    }
+  </nav>
+
+  <!-- Logout -->
+  <div class="sidebar-footer">
+    <button class="logout-btn" (click)="logout()">
+      <mat-icon>logout</mat-icon>
+      <span>Déconnexion</span>
+    </button>
+  </div>
+
+</aside>

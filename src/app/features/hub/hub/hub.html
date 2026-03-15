@@ -1,0 +1,13 @@
+<!-- Stats -->
+<div class="stats-row">
+  <app-stat-card icon="✅" [value]="stats().total"   label="Tâches totales" />
+  <app-stat-card icon="🎯" [value]="stats().done"    label="Complétées"     />
+  <app-stat-card icon="⏳" [value]="stats().pending" label="En cours"       />
+  <app-stat-card icon="⚠️" [value]="stats().overdue" label="En retard"      />
+</div>
+
+<!-- Modules -->
+<div class="section-header">
+  <h2 class="section-title">Mes modules</h2>
+</div>
+<app-module-grid />

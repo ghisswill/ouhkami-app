@@ -1,0 +1,27 @@
+/* Angular Material theme — API moderne (v17+) */
+@import '@angular/material/prebuilt-themes/indigo-pink.css';
+
+/* ── Reset & Base ────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: 'Roboto', sans-serif;
+  background: #F0F2FF;
+  color: #1E1E2E;
+}
+
+/* ── Material overrides ──────────────────────────────── */
+.mat-mdc-form-field {
+  margin-bottom: 8px;
+}
+
+.mat-mdc-raised-button {
+  border-radius: 12px !important;
+}
+
+/* ── Snackbar erreur ─────────────────────────────────── */
+.snack-error .mdc-snackbar__surface {
+  background: #FF6584 !important;
+  color: white !important;
+}

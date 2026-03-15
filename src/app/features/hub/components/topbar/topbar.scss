@@ -1,0 +1,22 @@
+.topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 32px;
+  background: rgba(240, 242, 255, 0.85);
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid rgba(108, 99, 255, 0.08);
+  position: sticky; top: 0; z-index: 5;
+}
+
+.topbar-title {
+  font-size: 20px;
+  font-weight: 700;
+  color: #1E1E2E;
+  margin: 0;
+}
+
+.topbar-actions {
+  display: flex;
+  gap: 4px;
+}

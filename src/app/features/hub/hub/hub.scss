@@ -1,0 +1,15 @@
+.stats-row {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+  margin-bottom: 28px;
+}
+
+.section-header { margin-bottom: 16px; }
+
+.section-title {
+  font-size: 18px;
+  font-weight: 700;
+  color: #1E1E2E;
+  margin: 0;
+}

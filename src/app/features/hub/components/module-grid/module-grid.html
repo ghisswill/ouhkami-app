@@ -1,0 +1,22 @@
+<div class="module-grid">
+
+  @for (module of modules; track module.id) {
+  <div class="module-card {{ module.color }}" [class.locked]="!module.isAvailable" (click)="navigate(module)">
+
+    <div class="module-icon"><mat-icon>{{ module.icon }}</mat-icon></div>
+
+    <div class="module-info">
+      <div class="module-title">{{ module.title }}</div>
+      <div class="module-subtitle">{{ module.subtitle }}</div>
+    </div>
+
+    @if (!module.isAvailable) {
+    <span class="module-badge">Bientôt</span>
+    } @else {
+    <span class="module-arrow">↗</span>
+    }
+
+  </div>
+  }
+
+</div>
