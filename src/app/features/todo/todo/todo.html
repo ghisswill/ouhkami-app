@@ -1,0 +1,20 @@
+<div class="todo-header">
+  <h1 class="todo-title">To Do List</h1>
+  <button mat-raised-button color="primary"
+          (click)="openCreateDialog()">
+    <mat-icon>add</mat-icon>
+    Nouvelle tâche
+  </button>
+</div>
+
+<app-progress-bar [percentage]="percentage()" />
+
+<app-category-filter (filterChange)="onFilterChange($event)" />
+
+<div class="todo-panel">
+  <app-task-list
+    [tasks]="filteredTasks()"
+    (toggle)="onToggle($event)"
+    (edit)="openEditDialog($event)"
+    (delete)="onDelete($event)" />
+</div>

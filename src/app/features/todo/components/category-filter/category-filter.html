@@ -1,0 +1,9 @@
+<div class="filter-row">
+  @for (chip of chips; track chip.label) {
+    <button class="chip"
+            [class.active]="activeFilter() === chip.value"
+            (click)="select(chip)">
+      {{ chip.label }}
+    </button>
+  }
+</div>

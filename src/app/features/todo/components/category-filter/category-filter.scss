@@ -1,0 +1,27 @@
+.filter-row {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-bottom: 16px;
+}
+
+.chip {
+  padding: 7px 16px;
+  border-radius: 20px;
+  border: 1.5px solid #EEE;
+  background: white;
+  font-size: 13px;
+  font-weight: 500;
+  color: #9E9EAE;
+  cursor: pointer;
+  font-family: 'Roboto', sans-serif;
+  transition: all 0.2s;
+
+  &:hover { border-color: #6C63FF; color: #6C63FF; }
+
+  &.active {
+    background: #6C63FF;
+    border-color: #6C63FF;
+    color: white;
+  }
+}

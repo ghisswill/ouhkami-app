@@ -1,0 +1,53 @@
+<div class="task-item" [class.done]="task.isDone">
+
+  <!-- Barre priorité -->
+  <div class="priority-bar"
+       [style.background]="priorityColor">
+  </div>
+
+  <!-- Checkbox -->
+  <div class="checkbox"
+       [class.checked]="task.isDone"
+       (click)="toggle.emit(task.id)">
+    @if (task.isDone) {
+      <mat-icon>check</mat-icon>
+    }
+  </div>
+
+  <!-- Contenu -->
+  <div class="task-content">
+    <div class="task-title" [class.strikethrough]="task.isDone">
+      {{ task.title }}
+    </div>
+    <div class="task-meta">
+      @if (task.note) { <span>{{ task.note }} · </span> }
+      <span>{{ formattedDate }}</span>
+    </div>
+  </div>
+
+  <!-- Badge catégorie -->
+  <span class="cat-badge"
+        [style.background]="catConfig.bg"
+        [style.color]="catConfig.color">
+    {{ catConfig.label }}
+  </span>
+
+  <!-- Menu ··· -->
+  <button mat-icon-button [matMenuTriggerFor]="menu"
+          (click)="$event.stopPropagation()">
+    <mat-icon>more_vert</mat-icon>
+  </button>
+
+  <mat-menu #menu="matMenu">
+    <button mat-menu-item (click)="edit.emit(task)">
+      <mat-icon>edit</mat-icon>
+      <span>Modifier</span>
+    </button>
+    <button mat-menu-item (click)="delete.emit(task.id)"
+            class="delete-item">
+      <mat-icon>delete</mat-icon>
+      <span>Supprimer</span>
+    </button>
+  </mat-menu>
+
+</div>

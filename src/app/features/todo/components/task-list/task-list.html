@@ -1,0 +1,12 @@
+<div class="task-list">
+    @if (tasks.length === 0) {
+    <div class="empty-state">
+        <span class="empty-icon">✅</span>
+        <p>Aucune tâche — appuyez sur + pour commencer !</p>
+    </div>
+    }
+    @for (task of tasks; track task.id) {
+    <app-task-item [task]="task" (toggle)="toggle.emit($event)" (edit)="edit.emit($event)"
+        (delete)="delete.emit($event)" />
+    }
+</div>
