@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { Component, inject } from '@angular/core';
+import { Router, RouterOutlet } from '@angular/router';
 import { Sidebar } from '../sidebar/sidebar';
 import { Topbar } from '../topbar/topbar';
 
@@ -9,4 +9,13 @@ import { Topbar } from '../topbar/topbar';
   templateUrl: './layout.html',
   styleUrl: './layout.scss',
 })
-export class Layout {}
+export class Layout {
+
+  private router = inject(Router);
+
+  get pageTitle(): string {
+    const url = this.router.url;
+    if (url.includes('todo')) return 'To Do List';
+    return 'Mon Hub';
+  }
+}

@@ -1,0 +1,20 @@
+.todo-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.todo-title {
+  font-size: 18px;
+  font-weight: 700;
+  color: #1E1E2E;
+  margin: 0;
+}
+
+.todo-panel {
+  background: white;
+  border-radius: 20px;
+  padding: 20px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+}

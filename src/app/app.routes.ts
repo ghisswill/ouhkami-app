@@ -14,11 +14,11 @@ export const routes: Routes = [
         canActivate: [authGuard],
         loadChildren: () => import('./features/hub/hub/hub.routes').then(m => m.HUB_ROUTES)
     },
-    /* {
+    {
         path: 'todo',
         canActivate: [authGuard],
-        loadComponent: () => import('./features/todo/Todo.component').then(m => m.TodoComponent)
-    }, */
+        loadChildren: () => import('./features/todo/todo/todo.routes').then(m => m.TODO_ROUTES)
+    },
     /* {
         path: 'hecommerce',
         canActivate: [authGuard],
