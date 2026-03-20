@@ -17,7 +17,7 @@ export const APP_MODULES: AppModule[] = [
     icon: 'check_circle',
     color: 'tile-purple',
     route: '/todo',
-    isAvailable: false,
+    isAvailable: true,
   },
   {
     id: 'planning',

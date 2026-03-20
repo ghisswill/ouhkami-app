@@ -2,11 +2,10 @@ import { Component, inject } from '@angular/core';
 import { Router, RouterOutlet } from '@angular/router';
 import { Sidebar } from '../sidebar/sidebar';
 import { Topbar } from '../topbar/topbar';
-import { AsyncPipe } from '@angular/common';
 
 @Component({
   selector: 'app-layout',
-  imports: [RouterOutlet, Sidebar, Topbar, AsyncPipe],
+  imports: [RouterOutlet, Sidebar, Topbar],
   templateUrl: './layout.html',
   styleUrl: './layout.scss',
 })
